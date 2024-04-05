@@ -1,8 +1,34 @@
+import { useState, useEffect } from 'react';
 import Input from '../components/form/Input';
+import Select from '../components/form/Select'
 
 import styles from './NovoLivro.module.css'
 
 function NovoLivro() {
+
+    const [categories, setCategories] = useState([]);
+
+    useEffect (()=>{
+        fetch(
+            'http://localhost:5000/categories',
+            {
+                method:'GET',
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            }).then(
+                (resp)=>resp.json()
+            ).then(
+                (data)=>{
+                    setCategories(data);
+                    console.log(data);
+                }
+            ).catch(
+                (error)=>{
+                    console.log(error)
+                }
+            )
+        }, [])
     return(
         <section className={styles.novo_livro_container}>
 
@@ -15,7 +41,7 @@ function NovoLivro() {
                 </p> */}
                 <Input
                     type="text"
-                    name="nome_livro"
+                    name="nome_livro"   
                     id="nome_livro"
                     placeholder="Digite o título do livro"
                     text="Digite o título do livro"
@@ -41,6 +67,12 @@ function NovoLivro() {
                     id="descricao"
                     placeholder="Digite uma descrição para o livro"
                     text="descricao"
+                />
+
+                <Select
+                    name="categoria_id"
+                    text="Selecione a categoria do livro"
+                    options={categories}
                 />
 
                 <p>
