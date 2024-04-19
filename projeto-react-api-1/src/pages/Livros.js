@@ -1,13 +1,34 @@
+import { useLocation } from 'react-router-dom';
+import Message from '../components/message/Message';
 import styles from './Livros.module.css'
 
 function Livros() {
-    return(
-      <section className={styles.livros_container}>
 
-        <h1>Aqui serão listados os seus livros</h1>
+  const location = useLocation();
+  let message='';
 
-      </section>
-    )
+  console.log('LOCATION STATE: ' + location.state)
+
+  if (location.state) {
+    message = location.state
+  }
+
+  return(
+    <section className={styles.livros_container}>
+
+      <h1>Aqui serão listados os seus livros</h1>
+
+      {
+        message && (
+          <Message
+            msg={message}
+            type='success'
+          /> 
+        )
+      }
+
+    </section>
+  )
 }
 
 export default Livros;

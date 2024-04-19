@@ -19,27 +19,67 @@
         "id": "2",
         "category": "BACK-END"
       }
+    },
+    {
+      "id": "7acf",
+      "nome_livro": "teste de cadastro de livro 2",
+      "nome_autor": "teste de cadastro de autor 2",
+      "descricao": "teste de descrição 2",
+      "category": {
+        "id": "4",
+        "category": "BANCO DE DADOS"
+      }
+    },
+    {
+      "id": "d167",
+      "nome_livro": "teste 3",
+      "nome_autor": "teste 3",
+      "descricao": "teste 3",
+      "category": {
+        "id": "4",
+        "category": "BANCO DE DADOS"
+      }
+    },
+    {
+      "id": "e060",
+      "nome_livro": "OI",
+      "nome_autor": "BB",
+      "descricao": "ola",
+      "category": {
+        "id": "4",
+        "category": "BANCO DE DADOS"
+      }
+    },
+    {
+      "id": "952d",
+      "nome_livro": "kakak",
+      "nome_autor": "lalala",
+      "descricao": "mamama",
+      "category": {
+        "id": "3",
+        "category": "FRONT-END"
+      }
     }
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Ficção Científica"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "BACK-END"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "FRONT-END"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "BANCO DE DADOS"
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "CLOUD COMPUTING"
     }
   ]
