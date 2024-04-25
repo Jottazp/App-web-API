@@ -59,6 +59,16 @@
         "id": "3",
         "category": "FRONT-END"
       }
+    },
+    {
+      "id": "a608",
+      "nome_livro": "TITULO LIVRO 2",
+      "nome_autor": "AUTOR LIVRO 2",
+      "descricao": "DESCRIÇÃO LIVRO 2",
+      "category": {
+        "id": "3",
+        "category": "FRONT-END"
+      }
     }
   ],
   "categories": [
