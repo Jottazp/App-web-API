@@ -9,6 +9,9 @@ function Livros() {
 
   const [books, setBooks] = useState([]);
 
+  /* ESTADO DE DADOS DA MENSAGEM DE EXCLUSÃO DE LIVRO */
+  const [bookMessage, setBookMessage] = useState('');
+
   useEffect(()=>{
 
     fetch('http://localhost:5000/books', {
@@ -21,7 +24,28 @@ function Livros() {
     .then((data)=>{setBooks(data)})
     .catch((err)=>{console.log(err)});
 
-  }, []);
+  }, [books]);
+
+  /* FUNÇÃO DE EXCLUSÃO DE LIVRO */
+  function removeBooks(id) {
+    
+    fetch(`http://localhost:5000/books/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type' : 'application.json'
+      },
+    })
+    .then(resp=> resp.json())
+    .then(
+      (data)=>{
+        // setBooks(books.filter((book_data)=>book_data.id !== id))
+        // alert('LIVRO EXCLUÍDO')
+        setBookMessage('LIVRO EXCLUÍDO COM SUCESSO!')
+      }
+    )
+    .catch(err=>console.log(err));
+
+  }
 
   const location = useLocation();
   let message='';
@@ -37,9 +61,19 @@ function Livros() {
 
       <h1>Aqui serão listados os seus livros</h1>
 
+      {/* MENSAGEM DE SUCESSO PARA CADASTRO */}
       {
         message && (<Message
                       msg={message}
+                      type='success'
+                    /> 
+        )
+      }
+
+      {/* MENSAGEM DE SUCESSO PARA EXCLUSÃO */}
+      {
+        bookMessage && (<Message
+                      msg={bookMessage}
                       type='success'
                     /> 
         )
@@ -54,6 +88,8 @@ function Livros() {
           livro={book.nome_livro}
           autor={book.nome_autor}
           categoria={book.category.category}
+          key={book.id}
+          handlerRemove={removeBooks}
         />
 
        )) 
