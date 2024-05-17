@@ -1,5 +1,16 @@
 {
-  "books": [],
+  "books": [
+    {
+      "id": "3223",
+      "nome_livro": "testando nova pagina",
+      "nome_autor": "jotta",
+      "descricao": "teste de pagina",
+      "category": {
+        "id": "3",
+        "category": "FRONT-END"
+      }
+    }
+  ],
   "categories": [
     {
       "id": "1",
