@@ -1,7 +1,7 @@
 import styles from './EditarLivro.module.css';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import Input from '../components/form/Input';
 import Select from '../components/form/Select'
@@ -11,8 +11,12 @@ function EditarLivro(){
     /*STATE DE DADOS DAS CATEGORIAS VINDAS DO ARQUIVO db.json*/
     const [categories, setCategories] = useState([]);
 
+    /*RECUPERANDO O ID DA URL*/
     const {id} = useParams();
     console.log('ID' + id)
+
+    /*OBJETO DE NAVEGAÇÃO*/
+    const navigate = useNavigate();
 
     const[book, setBook] = useState({});
 
@@ -42,7 +46,7 @@ function EditarLivro(){
     /*RECUPERANDO OS DADOS DE LIVROS PARA EDIÇÃO*/
     useEffect(()=>{
 
-        fetch(`http://localhost:5000/books${id}`, {
+        fetch(`http://localhost:5000/books/${id}`, {
           method: 'GET',
           headers: {
             'Content-Type' : 'application.json'
@@ -70,11 +74,35 @@ function EditarLivro(){
         // console.log(book)
       }
 
+    /*FUNCIONALIDADE DE EDIÇÃO DE LIVRO*/
+    function editBook(book){
+
+      fetch(`http://localhost:5000/books/${book.id}`, {
+        method:'PATCH',
+        headers: {
+          'Content-Type' : 'application.json'
+        },
+        body: JSON.stringify(book)
+      })
+      .then(resp=>resp.json())
+      .then((data)=>{
+        setBook(data);
+        navigate('/livros', {state:'Livro alterado com sucesso!'})
+      })
+      .catch(err=>(console.log(err)))
+    }
+
+    /*FUNÇÃO DE SUBMIT CONTROLADO DOS DADOS*/
+    function submit(event) {
+      event.preventDefault();
+      editBook(book);
+    }
+
     return(
         <div className={styles.book_container}>
             <h1>EDIÇÃO DE LIVRO</h1>
 
-            <form>
+            <form onSubmit={submit}>
 
               <Input
                 type="text"
@@ -83,7 +111,7 @@ function EditarLivro(){
                 placeholder="Digite o título do livro"
                 text="Digite o título do livro"
                 value={book.nome_livro}
-                // handlerOnchange={handlerChangeBook}
+                handlerOnchange={handlerChangeBook}
               />
 
               <Input
@@ -93,7 +121,7 @@ function EditarLivro(){
                 placeholder="Digite o nome do autor"
                 text="Digite o nome do autor"
                 value={book.nome_autor}
-                // handlerOnchange={handlerChangeBook}
+                handlerOnchange={handlerChangeBook}
               />
 
               <Input
@@ -103,15 +131,19 @@ function EditarLivro(){
                 placeholder="Digite uma descrição para o livro"
                 text="descricao"
                 value={book.descricao}
-                // handlerOnchange={handlerChangeBook}
+                handlerOnchange={handlerChangeBook}
               />
 
               <Select
                 name="categoria_id"
                 text="Selecione a categoria do livro"
                 options={categories}
-                // handlerOnchange={handlerChangeCategory}
+                handlerOnchange={handlerChangeCategory}
               />
+              
+              <p>
+                 <input type='submit' value='Editar Livro'/>
+              </p>
 
             </form>
 

@@ -2,12 +2,12 @@
   "books": [
     {
       "id": "3223",
-      "nome_livro": "testando nova pagina",
-      "nome_autor": "jotta",
-      "descricao": "teste de pagina",
+      "nome_livro": "Vida do Jotta",
+      "nome_autor": "Jotta",
+      "descricao": "Autobiografia do Jotta",
       "category": {
-        "id": "3",
-        "category": "FRONT-END"
+        "id": "1",
+        "category": "Ficção Científica"
       }
     }
   ],
