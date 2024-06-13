@@ -14,10 +14,13 @@ function Livros() {
 
   useEffect(()=>{
 
-    fetch('http://localhost:5000/books', {
+    fetch('http://localhost:5000/listagemLivros',{
       method: 'GET',
-      headers: {
-        'Content-Type' : 'application.json'
+      mode: 'cors',
+      headers:{
+          'Content-Type':'application/json',
+          'Access-Control-Allow-Origin':'*',
+          'Access-Control-Allow-Headers':'*',
       },
     })
     .then((resp)=>resp.json())
@@ -29,10 +32,13 @@ function Livros() {
   /* FUNÇÃO DE EXCLUSÃO DE LIVRO */
   function removeBooks(id) {
     
-    fetch(`http://localhost:5000/books/${id}`, {
+    fetch('http://localhost:5000/excluirLivro/${id}', {
       method: 'DELETE',
-      headers: {
-        'Content-Type' : 'application.json'
+      mode: 'cors',
+      headers:{
+          'Content-Type':'application/json',
+          'Access-Control-Allow-Origin':'*',
+          'Access-Control-Allow-Headers':'*',
       },
     })
     .then(resp=> resp.json())
@@ -81,18 +87,18 @@ function Livros() {
 
       {
 
-       books.map((book)=>(
-        
-        <CardBook
-          id={book.id}
-          livro={book.nome_livro}
-          autor={book.nome_autor}
-          categoria={book.category.category}
-          key={book.id}
-          handlerRemove={removeBooks}
-        />
-
-       )) 
+  books.map((book)=>(
+    
+    <CardBook
+        id={book.cod_livro}
+        livro={book.nome_livro}
+        autor={book.nome_autor}
+        // category={turmas.category.category}
+        key={book.cod_livro}
+        handlerRemover={removeBooks}
+    />
+    
+  ))
 
       }
 
