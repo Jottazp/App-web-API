@@ -17,27 +17,27 @@ function NovoLivro() {
     const [book, setBook] = useState({});
 
     /*RECUPERA OS DADOS DE CATEGORIA DO ARQUIVO db.json*/
-    useEffect (()=>{
-        fetch(
-            'http://localhost:5000/categories',
-            {
-                method:'GET',
-                headers:{
-                    'Content-Type':'application/json'
-                }
-            }).then(
-                (resp)=>resp.json()
-            ).then(
-                (data)=>{
-                    setCategories(data);
-                    console.log(data);
-                }
-            ).catch(
-                (error)=>{
-                    console.log(error)
-                }
-            )
-        }, [])
+    // useEffect (()=>{
+    //     fetch(
+    //         'http://localhost:5000/categories',
+    //         {
+    //             method:'GET',
+    //             headers:{
+    //                 'Content-Type':'application/json'
+    //             }
+    //         }).then(
+    //             (resp)=>resp.json()
+    //         ).then(
+    //             (data)=>{
+    //                 setCategories(data);
+    //                 console.log(data);
+    //             }
+    //         ).catch(
+    //             (error)=>{
+    //                 console.log(error)
+    //             }
+    //         )
+    //     }, [])
 
         /*HANDLER DE CAPTURA DOS DADOS DE SELECT (ID, CATEGORIA)*/
         function handlerChangeBook(event) {
@@ -56,10 +56,13 @@ function NovoLivro() {
         /*INSERÇÃO DOS DADOS DE LIVROS*/
         function createBook(book) {
 
-            fetch('http://localhost:5000/books', {
+            fetch('http://localhost:5000/inserirLivro', {
                 method:'POST',
+                mode:'cors',
                 headers:{
-                    'Content-Type':'application/json'
+                    'Content-Type':'application/json',
+                    'Access-Control-Allow-Origin':'*',
+                    'Access-Control-Allow-Headers':'*'
                 },
                 body: JSON.stringify(book)
             })
@@ -107,8 +110,8 @@ function NovoLivro() {
                 </p> */}
                 <Input
                     type="text"
-                    name="nome_autor"
-                    id="nome_autor"
+                    name="autor_livro"
+                    id="autor_livro"
                     placeholder="Digite o nome do autor"
                     text="Digite o nome do autor"
                     handlerOnchange={handlerChangeBook}
@@ -119,8 +122,8 @@ function NovoLivro() {
                 </p> */}
                 <Input
                     type="text"
-                    name="descricao"
-                    id="descricao"
+                    name="descricao_livro"
+                    id="descricao_livro"
                     placeholder="Digite uma descrição para o livro"
                     text="descricao"
                     handlerOnchange={handlerChangeBook}
